@@ -1,0 +1,12 @@
+*build
+*install
+*log
+*.vscode
+*libs
+**data
+**/.vscode/
+bin
+third_party/Pangolin/build/
+
+**cmake-build-debug**
+**cmake-build-release**
