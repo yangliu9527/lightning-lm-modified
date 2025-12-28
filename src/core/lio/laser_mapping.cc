@@ -283,7 +283,7 @@ bool LaserMapping::Run() {
         geometry_msgs::msg::TransformStamped msg;
         msg.header.frame_id = "map";
         msg.header.stamp = math::FromSec(state_point_.timestamp_);
-        msg.child_frame_id = "base_link";
+        msg.child_frame_id = "lidar";
 
         msg.transform.translation.x = cur_pose.translation().x();
         msg.transform.translation.y = cur_pose.translation().y();
@@ -303,7 +303,7 @@ bool LaserMapping::Run() {
         nav_msgs::msg::Odometry msg;
         msg.header.frame_id = "map";
         msg.header.stamp = math::FromSec(state_point_.timestamp_);
-        msg.child_frame_id = "base_link";
+        msg.child_frame_id = "lidar";
 
         msg.pose.pose.position.x = cur_pose.translation().x();
         msg.pose.pose.position.y = cur_pose.translation().y();
