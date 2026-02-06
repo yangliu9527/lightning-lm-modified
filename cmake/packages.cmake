@@ -29,9 +29,18 @@ endif ()
 
 if (BUILD_WITH_MARCH_NATIVE)
     add_compile_options(-march=native)
+# else ()
+#     add_definitions(-msse -msse2 -msse3 -msse4 -msse4.1 -msse4.2)
+#     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse -msse2 -msse3 -msse4 -msse4.1 -msse4.2")
+# endif ()
 else ()
-    add_definitions(-msse -msse2 -msse3 -msse4 -msse4.1 -msse4.2)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse -msse2 -msse3 -msse4 -msse4.1 -msse4.2")
+if (CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|i686")
+# 仅在 x86 平台使用 SSE 优化
+add_definitions(-msse -msse2 -msse3 -msse4 -msse4.1 -msse4.2)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse -msse2 -msse3 -msse4 -msse4.1 -msse4.2")
+else ()
+message(STATUS "Skipping SSE optimization on non-x86 platform (${CMAKE_SYSTEM_PROCESSOR})")
+endif ()
 endif ()
 
 include_directories(
